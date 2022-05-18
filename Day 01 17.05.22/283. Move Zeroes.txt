@@ -1,0 +1,32 @@
+//https://leetcode.com/problems/move-zeroes/submissions/
+
+class Solution {
+public:
+      void swap(int &num1,int &num2)
+    {
+        int temp=num1;
+        num1=num2;
+        num2=temp;
+    }
+    void moveZeroes(vector<int>& nums) {
+        
+       int n=nums.size();
+        int st=INT_MAX;
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]==0)
+                st=min(st,i);
+            else if((st<n && nums[i]!=0))
+            {
+                swap(nums[st],nums[i]);
+                if((st+1)<=i)
+                    st=st+1;
+                else
+                    st=i;
+               
+            }
+          
+        }
+        
+    }
+};

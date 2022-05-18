@@ -1,0 +1,26 @@
+//Ques: https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+
+class Solution {
+public:
+    void swap(int &num1,int &num2)
+    {
+        int temp=num1;
+        num1=num2;
+        num2=temp;
+    }
+    int removeDuplicates(vector<int>& nums) {
+        int p=1,curr=nums[0];
+        for(int i=1;i<nums.size();i++)
+        {
+            if(nums[i]==curr)
+                continue;
+            else
+            {
+                curr=nums[i];
+                swap(nums[p],nums[i]);
+                p++;
+            }
+        }
+        return p;
+    }
+};
