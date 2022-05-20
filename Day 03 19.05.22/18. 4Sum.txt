@@ -1,0 +1,61 @@
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        long long prev2=pow(10,9)+1;
+        
+            
+       long long prev=pow(10,9)+1; long long dupl=pow(10,9)+1,duph=pow(10,9)+1;
+        int n=nums.size();
+        sort(nums.begin(),nums.end()); int target2,target3;
+        vector<vector<int>> v;
+        vector<int> v2;
+        v2.push_back(100001);
+        v2.push_back(100001);
+        v2.push_back(100001);
+        v2.push_back(100001);
+        for(int i=0;i<n;i++)
+            {
+            if(nums[i]!=prev2)
+            {
+                target2=target-nums[i];
+                prev=pow(10,9)+1;
+        for(int j=i+1;j<n;j++)
+        {
+            
+            if(nums[j]!=prev)
+            {
+                target3=target2-nums[j];
+                dupl=pow(10,9)+1,duph=pow(10,9)+1;
+                int l=j+1,h=n-1;
+                while(l<h)
+                {
+                    if((nums[l]+nums[h])>target3)
+                        h-=1;
+                    else if((nums[l]+nums[h])<target3)
+                        l+=1;
+                    else
+                    {
+                       
+                        if(nums[l]!=duph && nums[h]!=duph && nums[l]!=dupl && nums[h]!=dupl)
+                        {
+                        v2[0]=nums[i],v2[1]=nums[j],v2[2]=nums[l];v2[3]=nums[h] ;
+                        v.push_back(v2);
+                        duph=nums[h];
+                        dupl=nums[l];
+                        }
+                        l+=1,h-=1;
+                    }
+                }
+                
+            }
+              prev=nums[j];
+            
+        }
+        }
+            prev2=nums[i];
+        }
+        return v;
+        
+        
+    }
+};

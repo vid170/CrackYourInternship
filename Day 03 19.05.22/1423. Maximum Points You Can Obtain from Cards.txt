@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int maxScore(vector<int>& cardPoints, int k) {
+        vector<int> sumf;
+        vector<int> sumb;
+        int n=cardPoints.size();
+        int ans=0;
+        sumf.push_back(0);
+        sumb.push_back(0);
+        int sum=0;
+        for(int i=0;i<k;i++)
+        {
+            sum+=cardPoints[i];
+            sumf.push_back(sum);
+        }
+        sum=0;
+        for(int i=n-1;i>n-1-k;i--)
+        {
+            sum+=cardPoints[i];
+            sumb.push_back(sum);
+        }
+        for(int i=0;i<k+1;i++)
+        {
+            ans=max(ans,sumf[i]+sumb[k-i]);
+        }
+        return ans;
+    }
+};

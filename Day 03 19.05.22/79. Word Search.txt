@@ -1,0 +1,44 @@
+
+Very IMP-- This wont work if yu take pass vectors by values in search function because 
+every time the recursion call is made it creates a new copy of the vector that takes 
+more time but when you pass by reference no new copy is made. So in pass by value time complexity goes to m*n*m*n in worst case 
+as the calaculated time complexity was m*n and copying board takes m*n ime so additional m*n for every m*n , thus m*m*n*n, 
+Note: You neccesarily need to pass vis and board as pass by reference o/w the code wont work however you can choose to pass word s pass by value since
+its length is small and in worst case it is cube complexity . But it degrades the solution.
+
+class Solution {
+public:
+    bool search(int i,int j, vector<vector<bool>> &vis,string &word,int idx,vector<vector<char>>& board)
+    {
+       
+        if(idx==word.length()-1) return true;
+        vis[i][j]=true;
+         int r=board.size();
+        int c=board[0].size();
+        if(i>0 && !vis[i-1][j] && word[idx+1]==board[i-1][j] && search(i-1,j,vis,word,idx+1,board)) return true;
+        if((i+1)<r && !vis[i+1][j] && word[idx+1]==board[i+1][j] && search(i+1,j,vis,word,idx+1,board)) return true;
+        if(j>0 && !vis[i][j-1] && word[idx+1]==board[i][j-1] && search(i,j-1,vis,word,idx+1,board)) return true;
+        if((j+1)<c && !vis[i][j+1] && word[idx+1]==board[i][j+1] && search(i,j+1,vis,word,idx+1,board)) return true;
+        vis[i][j]=false;
+        return false;
+    }
+    bool exist(vector<vector<char>>& board, string word) {
+        int r=board.size(),c=board[0].size();
+        vector<vector<bool>> vis(r,vector<bool>(c,false));
+        
+        for(int i=0;i<r;i++)
+        {
+            for(int j=0;j<c;j++)
+            {
+                if(board[i][j]==word[0] && search(i,j,vis,word,0,board))
+                    return true;
+                
+            }
+        }
+        return false;
+        
+    }
+};
+
+
+
